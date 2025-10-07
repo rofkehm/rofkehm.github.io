@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OhSINT: Rastreando un Gato con OSINT - Writeup de Voodoo</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            padding-left: 5%;
+            padding-right: 5%;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 150;
+            font-size: 1rem;
+            margin: 0;
+        }
+        a:link {
+            color: #00ff00;
+            word-break: break-all;
+            text-decoration: none;
+        }
+        a:active {
+            color: #00ff99;
+        }
+        a:visited {
+            color: #00cc00;
+        }
+        a:hover {
+            color: #00ff66;
+            text-decoration: underline;
+        }
+        .email {
+            color: #00ff00;
+        }
+        .box {
+            border: 2px solid #00ff00;
+            margin-top: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #001100;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .contact {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #00ff00;
+        }
+        .contact p {
+            margin: 0;
+            line-height: 1.5;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .evidence-img {
+            width: 100%;
+            max-width: 800px;
+            margin: 10px auto;
+            display: block;
+            border: 1px solid #00ff00;
+        }
+        .glitch {
+            animation: glitch 1s linear infinite;
+            font-size: 2rem;
+            text-shadow: 0 0 0.625rem #00ff00, 0 0 1.25rem #00ff00;
+        }
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+        h1, h2, h3, h4 {
+            margin-top: 20px;
+        }
+        h2 {
+            font-size: 1.5rem;
+        }
+        h3 {
+            font-size: 1.2rem;
+        }
+        h4 {
+            font-size: 1.1rem;
+        }
+        p {
+            margin: 15px 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        ul {
+            margin: 15px 0;
+        }
+        li {
+            margin: 5px 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .back-link {
+            font-size: 0.9em;
+        }
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 0.9rem;
+                padding: 3%;
+            }
+            .glitch {
+                font-size: 1.5rem;
+            }
+            .box {
+                padding: 0.75rem;
+                margin-top: 0.5rem;
+            }
+            .contact {
+                padding: 0.5rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            h3 {
+                font-size: 1rem;
+            }
+            h4 {
+                font-size: 0.9rem;
+            }
+            .back-link {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div id="intro">
+            <h1 class="glitch">OhSINT</h1>
+        </div>
+        <div class="back-link">
+            <a href="../../index.html">Volver al Portafolio</a>
+        </div>
+    </div>
+
+    <div class="contact">
+        <p>
+            Contacto: 
+            <a rel="me" href="https://www.instagram.com/javier.ignacio_s_f/">Instagram</a><br/>
+            <span class='email' onmouseover="e=document.getElementById('flip3');if(e.dir!='ltr'){e.dir='ltr';e.innerHTML=e.innerHTML.split('').reverse().join('');}">
+                <bdo id="flip3" dir="rtl">ablaetneufs.reivaj</bdo>@hotmail.com
+            </span>
+        </p>
+    </div>
+
+    <div class="box">
+        <h2>OSINT Writeup: OhSINT - TryHackMe</h2>
+        <p>
+            En el desafío OhSINT de TryHackMe, se nos proporciona una imagen (<code>WindowsXP_1551719014755.jpg</code>) para rastrear información sobre un usuario usando técnicas OSINT. A partir de los metadatos, identifiqué al usuario y usé X, GitHub y WordPress para responder preguntas sobre su avatar, ciudad, red WiFi, correo, destino de vacaciones y contraseña.
+        </p>
+
+        <h3>Metodología y Solución</h3>
+        <p>
+            Descargué la imagen con wget desde el enlace del reto. Sus propiedades: 234 kB, 1920x1080 píxeles.
+        </p>
+        <img src="images/WindowsXP_1551719014755.jpg" class="evidence-img" alt="Imagen descargada WindowsXP_1551719014755.jpg">
+
+        <p>
+            Analicé los metadatos con exiftool, encontrando el copyright <strong>OWoodflint</strong>, un alias que me llevó a buscar al usuario en Google.
+        </p>
+        <img src="images/exif_output.png" class="evidence-img" alt="Salida de exiftool mostrando copyright OWoodflint">
+
+        <p>
+            La búsqueda de "OWoodflint" en Google reveló su perfil de X (<a href="https://x.com/owoodflint?lang=es">@OWoodflint</a>) y su perfil de GitHub (<a href="https://github.com/OWoodflint">github.com/OWoodflint</a>), con un repositorio llamado <code>people_finder</code>.
+        </p>
+        <img src="images/google_search.png" class="evidence-img" alt="Búsqueda de OWoodflint en Google">
+
+        <h4>Flag 1: ¿De qué es el avatar de este usuario?</h4>
+        <p>
+            En el perfil de X de @OWoodflint, confirmé que el avatar es una foto de un <strong>gato</strong> (cat). Respuesta: <strong>cat</strong>.
+        </p>
+        <img src="images/cat.png" class="evidence-img" alt="Avatar de OWoodflint en X mostrando un gato">
+        <img src="images/flag1.png" class="evidence-img" alt="Información de Flag 1">
+
+        <h4>Flag 2: ¿En qué ciudad está esta persona?</h4>
+        <p>
+            En el repositorio GitHub <code>people_finder</code>, OWoodflint indica "I am from London". Respuesta: <strong>London</strong>.
+        </p>
+        <img src="images/city_london.png" class="evidence-img" alt="Repositorio GitHub indicando Londres">
+        <img src="images/flag2.png" class="evidence-img" alt="Información de Flag 2">
+
+        <h4>Flag 3: ¿Cuál es el SSID del punto de acceso WiFi al que se conectó?</h4>
+        <p>
+            Un post en X de @OWoodflint (3 mar. 2019) menciona un BSSID (<code>B4:5D:50:AA:86:41</code>) con el texto "From my house I can get free wifi ;D". Usé <a href="https://wigle.net/">WiGLE.net</a> para rastrear el BSSID y obtuve el SSID: <strong>UnileverWiFi</strong>.
+        </p>
+        <img src="images/x_post.png" class="evidence-img" alt="Post de X con BSSID">
+        <img src="images/SSID.png" class="evidence-img" alt="WiGLE mostrando SSID UnileverWiFi">
+        <img src="images/flag3.png" class="evidence-img" alt="Información de Flag 3">
+
+        <h4>Flag 4: ¿En qué sitio encontraste su dirección de correo electrónico?</h4>
+        <p>
+            En el respositorio de GitHub <code>people_finder</code> de OWoodflint, encontré el email <strong>OWoodflint@gmail.com</strong>. Respuesta: <strong>GitHub</strong>.
+        </p>
+        <img src="images/email.png" class="evidence-img" alt="Email en GitHub">
+        <img src="images/flag4.png" class="evidence-img" alt="Información de Flag 4">
+
+        <h4>Flag 5: ¿A dónde fue de vacaciones?</h4>
+        <p>
+            En el repositorio <code>people_finder</code>, hay un enlace a un sitio WordPress (<a href="https://oliverwoodflint.wordpress.com/">oliverwoodflint.wordpress.com</a>) donde OWoodflint menciona un viaje a <strong>New York</strong>.
+        </p>
+        <img src="images/vaca_loc.png" class="evidence-img" alt="WordPress mencionando New York">
+        <img src="images/flag5.png" class="evidence-img" alt="Información de Flag 5">
+
+        <h4>Flag 6: ¿Cuál es la contraseña de la persona?</h4>
+        <p>
+            Inspeccioné el código fuente del sitio WordPress y encontré la contraseña expuesta: <strong>pennYDr0pper.!</strong>. Esto muestra la falta de cuidado del usuario con sus datos.
+        </p>
+        <img src="images/password.png" class="evidence-img" alt="Código fuente de WordPress con contraseña">
+        <img src="images/flag6.png" class="evidence-img" alt="Información de Flag 6">
+
+        <h3>Recursos Utilizados</h3>
+        <ul>
+            <li><a href="https://exiftool.org/">Exiftool - Análisis de metadatos</a></li>
+            <li><a href="https://wigle.net/">WiGLE.net - Rastreo de BSSID</a></li>
+            <li><a href="https://x.com/owoodflint?lang=es">X - Perfil de OWoodflint</a></li>
+            <li><a href="https://github.com/OWoodflint">GitHub - Repositorio people_finder</a></li>
+            <li><a href="https://oliverwoodflint.wordpress.com/">WordPress - Blog de OWoodflint</a></li>
+            <li><a href="https://www.sirgaschile.cl/ConversionSC/convertidor.php">Conversor de Coordenadas - SIRGAS Chile</a></li>
+        </ul>
+
+        <h3>Notas</h3>
+        <ul>
+            <li>Los metadatos incluían coordenadas GPS (54° 17' 41.27" N, 2° 15' 1.33" W), convertidas a decimal (54.294797, -2.250369) con un conversor. Curiosamente, coinciden con la ubicación del fondo de pantalla "Bliss" de Windows XP en Cumbria, Inglaterra, aunque no fueron relevantes para las banderas.</li>
+            <li>El nombre del archivo (<code>WindowsXP_1551719014755.jpg</code>) incluye un timestamp (1551719014755), que equivale al 4 mar. 2019, 14:23:34 UTC, indicando cuándo se creó o renombró la imagen.</li>
+            <li>La exposición de datos sensibles (BSSID, email, contraseña) por OWoodflint facilitó el OSINT.</li>
+            <li>2025-10-06 - Análisis completado a las 17:27 -03.</li>
+            <li>2025-10-06 - Publicación inicial del writeup.</li>
+        </ul>
+    </div>
+
+    <div id="visit-counter">Visitas: 0</div>
+    <script type="module" src="/scripts/visitor_counter.js"></script>
+    
+</body>
+</html>

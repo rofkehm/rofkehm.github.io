@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descubriendo la Campaña de Deslegitimación Empresarial - Writeup de Voodoo</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            padding-left: 5%;
+            padding-right: 5%;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 150;
+            font-size: 1rem; /* Base para escritorio */
+            margin: 0;
+        }
+        a:link {
+            color: #00ff00;
+            word-break: break-all;
+            text-decoration: none;
+        }
+        a:active {
+            color: #00ff99;
+        }
+        a:visited {
+            color: #00cc00;
+        }
+        a:hover {
+            color: #00ff66;
+            text-decoration: underline;
+        }
+        .email {
+            color: #00ff00;
+        }
+        .box {
+            border: 2px solid #00ff00;
+            margin-top: 0.625rem;
+            padding: 0.9375rem;
+            border-radius: 0.625rem;
+            background-color: #001100;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            box-shadow: 0 0 0.625rem #00ff00;
+        }
+        .contact {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding: 0.625rem;
+            border-bottom: 1px solid #00ff00;
+        }
+        .contact p {
+            margin: 0;
+            line-height: 1.5;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .evidence-img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 0.625rem auto;
+            display: block;
+            border: 1px solid #00ff00;
+        }
+        .glitch {
+            animation: glitch 1s linear infinite;
+            font-size: 2rem;
+            text-shadow: 0 0 0.625rem #00ff00, 0 0 1.25rem #00ff00;
+        }
+        @keyframes glitch {
+            2%, 64% { transform: translate(0.125rem, 0) skew(0deg); }
+            4%, 60% { transform: translate(-0.125rem, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+        h1, h2, h3, h4 {
+            margin-top: 1.25rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+        }
+        h3 {
+            font-size: 1.2rem;
+        }
+        h4 {
+            font-size: 1.1rem;
+        }
+        p {
+            margin: 0.9375rem 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        ul {
+            margin: 0.9375rem 0;
+        }
+        li {
+            margin: 0.3125rem 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+        .back-link {
+            font-size: 0.9rem;
+        }
+        /* Media queries para dispositivos móviles */
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 0.9rem; /* Aumentar tamaño de fuente en móviles */
+                padding: 3%;
+            }
+            .glitch {
+                font-size: 1.5rem; /* Reducir título en móviles */
+            }
+            .box {
+                padding: 0.75rem;
+                margin-top: 0.5rem;
+            }
+            .contact {
+                padding: 0.5rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            h3 {
+                font-size: 1rem;
+            }
+            h4 {
+                font-size: 0.9rem;
+            }
+            .back-link {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div id="intro">
+            <h1 class="glitch">voodoo</h1>
+        </div>
+        <div class="back-link">
+            <a href="../../index.html">Volver al Portafolio</a>
+        </div>
+    </div>
+
+    <div class="contact">
+        <p>
+            Contacto: 
+            <a rel="me" href="https://www.instagram.com/javier.ignacio_s_f/">Instagram</a><br/>
+            <span class='email' onmouseover="e=document.getElementById('flip3');if(e.dir!='ltr'){e.dir='ltr';e.innerHTML=e.innerHTML.split('').reverse().join('');}">
+                <bdo id="flip3" dir="rtl">ablaetneufs.reivaj</bdo>@hotmail.com
+            </span>
+        </p>
+    </div>
+
+    <div class="box">
+        <h2>OSINT Writeup: The Suspicious Domain - HTB Challenge</h2>
+        <p>
+            En el desafío The Suspicious Domain de Hack The Box, investigamos el dominio <strong>alexmorgan-reviews.net</strong>, identificado como parte de una campaña de manipulación de reseñas contra TechFlow. Usando la herramienta DomainScope, analizamos WHOIS, DNS Records, Hosting y otros datos para responder 6 preguntas principales y 3 de correlación, identificando un identificador clave que conecta el dominio a la infraestructura de la campaña.
+        </p>
+
+        <h3>Metodología y Solución</h3>
+        <h4>Pregunta 1: ¿Cuál es el correo electrónico del registrante en el registro WHOIS?</h4>
+        <p>
+            En la pestaña WHOIS de DomainScope, bajo la sección "Registrant Contact", encontramos el correo del registrante: <strong>alex.morgan@tempmail.com</strong>. Esto sugiere el uso de un servicio de correo temporal, común en operaciones sospechosas.
+        </p>
+        <img src="images/email.png" class="evidence-img" alt="Captura de WHOIS Registrant Contact">
+        <img src="images/flag1.png" class="evidence-img" alt="Flag Pregunta 1">
+
+        <h4>Pregunta 2: ¿Cuál es el número de teléfono completo, incluyendo el código de país?</h4>
+        <p>
+            En la misma sección "Registrant Contact" del WHOIS, se lista el número de teléfono: <strong>+1-408-555-0987</strong>, que incluye el código de país (+1) para EE. UU.
+        </p>
+        <img src="images/number.png" class="evidence-img" alt="Captura de WHOIS Phone">
+        <img src="images/flag2.png" class="evidence-img" alt="Flag Pregunta 2">
+
+        <h4>Pregunta 3: ¿Cuándo se creó el dominio? (Formato: YYYY-MM-DD)</h4>
+        <p>
+            En la sección "Domain Information" del WHOIS, la fecha de creación del dominio es <strong>2024-01-20</strong>, como se muestra en la captura.
+        </p>
+        <img src="images/date.png" class="evidence-img" alt="Captura de WHOIS Creation Date">
+        <img src="images/flag3.png" class="evidence-img" alt="Flag Pregunta 3">
+
+        <h4>Pregunta 4: ¿Cuál es el nombre exacto de la organización en el WHOIS?</h4>
+        <p>
+            En "Registrant Contact" del WHOIS, la organización registrada es <strong>Morgan Tech Reviews LLC</strong>, lo que indica una entidad posiblemente creada para encubrir la campaña.
+        </p>
+        <img src="images/registrant.png" class="evidence-img" alt="Captura de WHOIS Organization">
+        <img src="images/flag4.png" class="evidence-img" alt="Flag Pregunta 4">
+
+        <h4>Pregunta 5: ¿Qué ciudad aparece en la dirección del registrante?</h4>
+        <p>
+            En la sección "Contact Information" de DomainScope, la ciudad listada es <strong>San Jose, California</strong>, como parte de la dirección del registrante.
+        </p>
+        <img src="images/registrant_city.png" class="evidence-img" alt="Captura de Contact Information City">
+        <img src="images/flag5.png" class="evidence-img" alt="Flag Pregunta 5">
+
+        <h4>Pregunta 6: ¿Cuál es el estado de transferencia del dominio?</h4>
+        <p>
+            En la sección "Domain Information" del WHOIS, el estado del dominio es <strong>clientTransferProhibited</strong>. Según ICANN, este estado indica que el dominio está bloqueado para transferencias, lo que podría ser una medida para aparentar legitimidad o evitar que se transfiera mientras se usa con fines maliciosos.
+        </p>
+        <img src="images/status.png" class="evidence-img" alt="Captura de WHOIS Transfer Status">
+        <img src="images/flag6.png" class="evidence-img" alt="Flag Pregunta 6">
+
+        <h4>Pregunta 7: ¿Qué empresa está siendo atacada?</h4>
+        <p>
+            El desafío indica que el dominio forma parte de una campaña de manipulación de reseñas contra <strong>TechFlow</strong>, con comentarios negativos como "Overpriced and underdelivers..." y "Terrible customer support...". Esto se deduce del contexto y la descripción del desafío.
+        </p>
+        <img src="images/target.png" class="evidence-img" alt="Captura de reseñas negativas">
+        <img src="images/flag7.png" class="evidence-img" alt="Flag Pregunta 7">
+
+        <h4>Pregunta 8: ¿Qué servicio de correo está usando el actor de la amenaza?</h4>
+        <p>
+            El correo del registrante, <strong>alex.morgan@tempmail.com</strong>, indica que el actor usa <strong>TempMail</strong>, un servicio de correo electrónico temporal, como se ve en la sección "Contact Information" y confirmado en la página principal de DomainScope.
+        </p>
+        <img src="images/email_dom.png" class="evidence-img" alt="Captura de TempMail">
+        <img src="images/flag8.png" class="evidence-img" alt="Flag Pregunta 8">
+
+        <h4>Pregunta 9: ¿Cuántas IPs de GitHub Pages están configuradas?</h4>
+        <p>
+            En la pestaña "DNS Records" de DomainScope, la IP <strong>185.199.108.153</strong> aparece repetida 4 veces, asociada a GitHub Pages, lo que indica que el dominio usa 4 configuraciones de IPs de GitHub Pages.
+        </p>
+        <img src="images/github_ips.png" class="evidence-img" alt="Captura de DNS Records">
+        <img src="images/flag9.png" class="evidence-img" alt="Flag Pregunta 9">
+
+        <h3>Hallazgos Clave</h3>
+        <ul>
+            <li><strong>Registrante:</strong> Alex Morgan, usando correo temporal (<strong>alex.morgan@tempmail.com</strong>).</li>
+            <li><strong>Teléfono:</strong> +1-408-555-0987, registrado en EE. UU.</li>
+            <li><strong>Fecha de Creación:</strong> 2024-01-20.</li>
+            <li><strong>Organización:</strong> Morgan Tech Reviews LLC, posiblemente ficticia.</li>
+            <li><strong>Ciudad:</strong> San Jose, California.</li>
+            <li><strong>Estado de Transferencia:</strong> clientTransferProhibited, bloqueando transferencias.</li>
+            <li><strong>Empresa Atacada:</strong> TechFlow, objetivo de reseñas falsas.</li>
+            <li><strong>Servicio de Correo:</strong> TempMail, usado para anonimato.</li>
+            <li><strong>IPs de GitHub Pages:</strong> 4 instancias de 185.199.108.153.</li>
+        </ul>
+
+        <h3>Recursos Utilizados</h3>
+        <ul>
+            <li><a href="https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en">ICANN - EPP Status Codes</a></li>
+        </ul>
+
+        <h3>Notas</h3>
+        <ul>
+            <li>El dominio usa servicios como TempMail y GitHub Pages para ocultar su infraestructura.</li>
+            <li>Recomendación: Reportar a registradores y plataformas para mitigar la campaña.</li>
+            <li>2025-10-04 - Análisis completado y writeup publicado.</li>
+        </ul>
+    </div>
+        
+    <div id="visit-counter">Visitas: 0</div>
+    <script type="module" src="/scripts/visitor_counter.js"></script>
+    
+</body>
+</html>

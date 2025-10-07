@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de Voodoo</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            padding: 5%;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 150;
+            margin: 0;
+            font-size: 16px; /* Base para escritorio */
+        }
+        a:link {
+            color: #00ff00;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        a:active {
+            color: #00ff99;
+        }
+        a:visited {
+            color: #00cc00;
+        }
+        a:hover {
+            color: #00ff66;
+            text-decoration: underline;
+        }
+        .email {
+            color: #00ff00;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .glitch {
+            animation: glitch 1s linear infinite;
+            font-size: 2.5rem;
+            text-shadow: 0 0 0.625rem #00ff00, 0 0 1.25rem #00ff00;
+        }
+        @keyframes glitch {
+            2%, 64% { transform: translate(0.125rem, 0) skew(0deg); }
+            4%, 60% { transform: translate(-0.125rem, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+        .section {
+            border: 2px solid #00ff00;
+            border-radius: 0.625rem;
+            background-color: #001100;
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 0 0.625rem #00ff00;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .section h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 0.625rem;
+        }
+        .section h3 {
+            margin-top: 1.25rem;
+            font-size: 1.2rem;
+        }
+        .section p, .section ul {
+            margin: 0.625rem 0;
+        }
+        .section li {
+            margin: 0.3125rem 0;
+        }
+        .contact {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding: 0.625rem;
+            border-bottom: 1px solid #00ff00;
+        }
+        .contact p {
+            margin: 0;
+            line-height: 1.5;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        #bio {
+            text-align: justify;
+        }
+        /* Media queries para dispositivos móviles */
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 1rem; /* Aumentar tamaño de fuente en móviles */
+                padding: 3%;
+            }
+            .glitch {
+                font-size: 1.8rem; /* Reducir título en móviles */
+            }
+            .section h2 {
+                font-size: 1.2rem;
+            }
+            .section h3 {
+                font-size: 1rem;
+            }
+            .section {
+                padding: 0.75rem;
+                margin-bottom: 0.75rem;
+            }
+            .contact {
+                padding: 0.5rem;
+            }
+        }
+        /* Ajustar imágenes para todos los writeups */
+        .evidence-img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 0.625rem auto;
+            display: block;
+            border: 1px solid #00ff00;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div id="intro">
+            <h1 class="glitch">Voodoo</h1>
+        </div>
+    </div>
+
+    <div class="contact">
+        <p>
+            Contacto: 
+            <a rel="me" href="https://www.instagram.com/javier.ignacio_s_f/">Instagram</a><br/>
+            <span class="email" onmouseover="e=document.getElementById('flip3');if(e.dir!='ltr'){e.dir='ltr';e.innerHTML=e.innerHTML.split('').reverse().join('');}">
+                <bdo id="flip3" dir="rtl">ablaetneufs.reivaj</bdo>@hotmail.com
+            </span>
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Bio</h2>
+        <p id="bio">
+            Soy Javier, alias Voodoo, un apasionado de las computadoras y el universo digital. Mi fascinación por la informática comenzó explorando sistemas, desde el hardware hasta el código, y encontró su hogar en Linux, donde la libertad y la personalización son la clave. Actualmente, estoy inmerso en el mundo del OSINT, desentrañando información pública con un enfoque metódico y creativo. Este portafolio es mi carta de presentación: un espacio dinámico que crecerá con writeups, proyectos y herramientas a medida que avanzo en ciberseguridad, programación y análisis de datos. Mi meta es dominar el arte de navegar el ciberespacio, siempre un paso adelante en la red.
+        </p>
+    </div>
+
+        <div class="section">
+        <h2>Última Publicación</h2>
+        <p>
+            <a href="writeups/OhSINT/index.html">OSINT Writeup: OhSINT - TryHackMe</a>
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Portafolio de Proyectos</h2>
+        <h3>OSINT</h3>
+        <ul>
+            <li><a href="writeups/The_Puppet_Master/index.html">OSINT Writeup: The Puppet Master - HTB Challenge</a></li>
+            <li><a href="writeups/The_Suspicious_Domain/index.html">OSINT Writeup: The Suspicious Domain - HTB Challenge</a></li>
+            <li><a href="writeups/OhSINT/index.html">OSINT Writeup: OhSINT - TryHackMe</a></li>
+        </ul>
+        <h3>Exploits Avanzados</h3>
+        <ul>
+            <li><a href="#">Exploit Futuro</a></li>
+        </ul>
+        <h3>Investigaciones de Seguridad</h3>
+        <ul>
+            <li><a href="#">Investigación Futura</a></li>
+        </ul>
+        <h3>Herramientas Personalizadas</h3>
+        <ul>
+            <li><a href="#">Herramienta Futura</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Recursos</h2>
+        <ul>
+            <li><a href="#">Recurso 1</a></li>
+            <li><a href="#">Recurso 2</a></li>
+            <li><a href="#">Recurso 3</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Inspiración</h2>
+        <ul>
+            <li><a href="#">Fuente 1</a></li>
+            <li><a href="#">Fuente 2</a></li>
+            <li><a href="#">Fuente 3</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Misc</h2>
+        <ul>
+            <li>2025-10-06 - <a href="writeups/OhSINT/index.html">OhSINT Writeup</a></li>
+            <li>2025-10-04 - <a href="writeups/The_Suspicious_Domain/index.html">The Suspicious Domain Writeup</a></li>
+            <li>2025-10-04 - <a href="writeups/The_Puppet_Master/index.html">The Puppet Master Writeup</a></li>
+            <li>2025-10-04 - <a href="writeups/The_Suspicious_Domain/index.html">The Suspicious Domain Writeup</a></li>
+        </ul>
+    </div>
+
+    <div id="visit-counter">Visitas: 0</div>
+    <script type="module" src="/scripts/visitor_counter.js"></script>
+    
+</body>
+</html>

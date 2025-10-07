@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Puppet Master - Writeup de Voodoo</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            padding-left: 5%;
+            padding-right: 5%;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 150;
+            font-size: 1rem; /* Base para escritorio */
+            margin: 0;
+        }
+        a:link {
+            color: #00ff00;
+            word-break: break-all;
+            text-decoration: none;
+        }
+        a:active {
+            color: #00ff99;
+        }
+        a:visited {
+            color: #00cc00;
+        }
+        a:hover {
+            color: #00ff66;
+            text-decoration: underline;
+        }
+        .email {
+            color: #00ff00;
+        }
+        .box {
+            border: 2px solid #00ff00;
+            margin-top: 0.625rem;
+            padding: 0.9375rem;
+            border-radius: 0.625rem;
+            background-color: #001100;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            box-shadow: 0 0 0.625rem #00ff00;
+        }
+        .contact {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding: 0.625rem;
+            border-bottom: 1px solid #00ff00;
+        }
+        .contact p {
+            margin: 0;
+            line-height: 1.5;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .evidence-img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 0.625rem auto;
+            display: block;
+            border: 1px solid #00ff00;
+        }
+        .glitch {
+            animation: glitch 1s linear infinite;
+            font-size: 2rem;
+            text-shadow: 0 0 0.625rem #00ff00, 0 0 1.25rem #00ff00;
+        }
+        @keyframes glitch {
+            2%, 64% { transform: translate(0.125rem, 0) skew(0deg); }
+            4%, 60% { transform: translate(-0.125rem, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+        h1, h2, h3, h4 {
+            margin-top: 1.25rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+        }
+        h3 {
+            font-size: 1.2rem;
+        }
+        h4 {
+            font-size: 1.1rem;
+        }
+        p {
+            margin: 0.9375rem 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        ul {
+            margin: 0.9375rem 0;
+        }
+        li {
+            margin: 0.3125rem 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+        .back-link {
+            font-size: 0.9rem;
+        }
+        /* Media queries para dispositivos móviles */
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 0.9rem; /* Aumentar tamaño de fuente en móviles */
+                padding: 3%;
+            }
+            .glitch {
+                font-size: 1.5rem; /* Reducir título en móviles */
+            }
+            .box {
+                padding: 0.75rem;
+                margin-top: 0.5rem;
+            }
+            .contact {
+                padding: 0.5rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            h3 {
+                font-size: 1rem;
+            }
+            h4 {
+                font-size: 0.9rem;
+            }
+            .back-link {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div id="intro">
+            <h1 class="glitch">The Puppet Master</h1>
+        </div>
+        <div class="back-link">
+            <a href="../../index.html">Volver al Portafolio</a>
+        </div>
+    </div>
+
+    <div class="contact">
+        <p>
+            Contacto: 
+            <a rel="me" href="https://www.instagram.com/javier.ignacio_s_f/">Instagram</a><br/>
+            <span class='email' onmouseover="e=document.getElementById('flip3');if(e.dir!='ltr'){e.dir='ltr';e.innerHTML=e.innerHTML.split('').reverse().join('');}">
+                <bdo id="flip3" dir="rtl">ablaetneufs.reivaj</bdo>@hotmail.com
+            </span>
+        </p>
+    </div>
+
+    <div class="box">
+        <h2>OSINT Writeup: The Puppet Master - HTB Challenge</h2>
+        <p>
+            En el desafío The Puppet Master de Hack The Box, se nos proporciona una imagen de un vehículo militar blindado y se nos pide identificar, usando técnicas OSINT, el tipo de vehículo, su fabricante, el año de entrada en servicio, el país de origen y la capacidad de pasajeros.
+        </p>
+
+        <h3>Metodología y Solución</h3>
+        <p>
+            Analizamos la imagen proporcionada con una búsqueda inversa en Google Imágenes, identificando el vehículo como un <strong>Bushmaster</strong>. Como se observa en la imagen siguiente, esta búsqueda nos dio la primera flag: <strong>Modelo: Bushmaster</strong>.
+        </p>
+        <img src="images/reverse_search.png" class="evidence-img" alt="Captura de búsqueda inversa">
+        <img src="images/flag1.png" class="evidence-img" alt="Información de Flag 1">
+
+        <h4>Flag 2: Fabricante</h4>
+        <p>
+            Buscamos "Bushmaster" en Wikipedia (<a href="https://en.wikipedia.org/wiki/Bushmaster_Protected_Mobility_Vehicle">enlace</a>). En la sección "Production history" se indica que el fabricante y diseñador es <strong>Thales Australia</strong>, obteniendo la segunda flag. Como se ve en la captura siguiente, esta información es clara.
+        </p>
+        <img src="images/manufacturer.png" class="evidence-img" alt="Captura de Production history">
+        <img src="images/flag2.png" class="evidence-img" alt="Información de Flag 2">
+
+        <h4>Flag 3: Año de Servicio</h4>
+        <p>
+            En la sección "Service history" de la misma página, se confirma que el vehículo entró en servicio en <strong>1997</strong>, dando la tercera flag. Esto se aprecia en la imagen de abajo.
+        </p>
+        <img src="images/service_history.png" class="evidence-img" alt="Captura de Service history">
+        <img src="images/flag3.png" class="evidence-img" alt="Información de Flag 3">
+
+        <h4>Flag 4: País de Origen</h4>
+        <p>
+            En "Place of origin" se establece que el país de origen es <strong>Australia</strong>, deducible también por el nombre Thales Australia, proporcionando la cuarta flag. Como se muestra en la figura siguiente, el país está explícitamente indicado.
+        </p>
+        <img src="images/place_origin.png" class="evidence-img" alt="Captura de Place of origin">
+        <img src="images/Flag4.png" class="evidence-img" alt="Información de Flag 4">
+
+        <h4>Flag 5: Capacidad</h4>
+        <p>
+            En la sección "Specifications" de Wikipedia, se detalla que el vehículo tiene capacidad para <strong>1 conductor y 9 pasajeros</strong>, completando la quinta flag. Como se observa en la captura siguiente, las especificaciones son claras.
+        </p>
+        <img src="images/especification.png" class="evidence-img" alt="Captura de Specifications">
+        <img src="images/flag5.png" class="evidence-img" alt="Información de Flag 5">
+
+        <h3>Recursos Utilizados</h3>
+        <ul>
+            <li><a href="https://images.google.com/">Google Imágenes - Búsqueda inversa</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Bushmaster_Protected_Mobility_Vehicle">Wikipedia - Bushmaster</a></li>
+        </ul>
+
+        <h3>Notas</h3>
+        <ul>
+            <li>Descargué la imagen con wget.</li>
+            <li>El nombre del archivo, 20230525_NZDF_P1061532_025__FocusFillWyIwLjAwIiwiMC4wMCIsNjAwLDQwMF0.JPG, contiene la fecha de la toma ("20230525") y la nomenclatura "NZDF", que sugiere origen en las Fuerzas Armadas de Nueva Zelanda.</li>
+            <li>El segmento "WyIwLjAwIiwiMC4wMCIsNjAwLDQwMF0" es un hash en base64 que, al decodificarse, resulta en ["0.00","0.00",600,400]. Esto indica coordenadas de origen (X=0.00, Y=0.00) de un recorte de la imagen original y dimensiones de 600x400 píxeles, coincidiendo con el tamaño reportado por exiftool (Image Size: 600x400).</li>
+            <li>2025-10-01 - Análisis completado.</li>
+            <li>2025-10-04 - Publicación inicial del writeup.</li>
+        </ul>
+    </div>
+
+    <div id="visit-counter">Visitas: 0</div>
+    <script type="module" src="/scripts/visitor_counter.js"></script>
+    
+</body>
+</html>
