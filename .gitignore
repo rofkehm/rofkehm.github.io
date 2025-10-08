@@ -1,0 +1,4 @@
+# Ignorar entorno virtual y scripts locales
+.venv/
+__pycache__/
+generate_index.py

@@ -1,20 +1,42 @@
-async function updateVisitCounter() {
-  const pagePath = window.location.pathname.replace(/\//g, '_'); // Ejemplo: "_writeups_OhSINT_index.html"
+function updateVisitCounter() {
+  const pagePath = window.location.pathname.replace(/\//g, '_') || 'index'; // Ejemplo: "_writeups_OhSINT_index.html"
   const counterElement = document.getElementById('visit-counter');
-  try {
-    const response = await fetch(`https://api.countapi.xyz/hit/voodooos/visitcounter`);
-    const data = await response.json();
-
-    counterElement.textContent = `Visitas: ${data.value}`;
-    counterElement.style.color = '#00ff00';
-    counterElement.style.fontFamily = "'Courier New', Courier, monospace";
-    counterElement.style.textAlign = 'center';
-    counterElement.style.marginTop = '15px';
-    counterElement.style.textShadow = '0 0 0.625rem #00ff00';
-  } catch (error) {
-    console.error('Error al actualizar contador:', error);
-    counterElement.textContent = 'Visitas: Error';
+  if (!counterElement) {
+    console.error('Elemento #visit-counter no encontrado');
+    return;
   }
+
+  console.log('Iniciando contador para página:', pagePath); // Depuración
+
+  // Cargar la librería de CounterAPI
+  const script = document.createElement('script');
+  script.src = 'https://counterapi.com/c.js?ns=voodooos';
+  script.async = true;
+  script.onload = function() {
+    const counterDiv = document.createElement('div');
+    counterDiv.className = 'counterapi';
+    counterDiv.style.minHeight = '44px';
+    counterDiv.style.color = '#00ff00';
+    counterDiv.style.fontFamily = "'Courier New', Courier, monospace";
+    counterDiv.style.textAlign = 'center';
+    counterDiv.style.marginTop = '15px';
+    counterDiv.style.textShadow = '0 0 0.625rem #00ff00';
+
+    counterDiv.setAttribute('behavior', 'view');
+    counterDiv.setAttribute('label', 'Visitas');
+    counterDiv.setAttribute('abbreviate', 'true');
+    counterDiv.setAttribute('noIcon', 'true');
+    counterDiv.setAttribute('noCss', 'true');
+    counterDiv.setAttribute('key', pagePath); // Contador por página
+
+    counterElement.appendChild(counterDiv);
+  };
+  script.onerror = function() {
+    console.error('Error al cargar la librería de CounterAPI');
+    counterElement.textContent = 'Visitas: Error';
+  };
+
+  document.head.appendChild(script);
 }
 
 document.addEventListener('DOMContentLoaded', updateVisitCounter);
