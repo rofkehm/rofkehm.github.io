@@ -1,0 +1,318 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crocodile: Tier 1 Very Easy - Writeup de Voodoo</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            padding-left: 5%;
+            padding-right: 5%;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 150;
+            font-size: 1rem;
+            margin: 0;
+        }
+        a:link {
+            color: #00ff00;
+            word-break: break-all;
+            text-decoration: none;
+        }
+        a:active {
+            color: #00ff99;
+        }
+        a:visited {
+            color: #00cc00;
+        }
+        a:hover {
+            color: #00ff66;
+            text-decoration: underline;
+        }
+        .email {
+            color: #00ff00;
+        }
+        .box {
+            border: 2px solid #00ff00;
+            margin-top: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #001100;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .contact {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #00ff00;
+        }
+        .contact p {
+            margin: 0;
+            line-height: 1.5;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .evidence-img {
+            width: 100%;
+            max-width: 800px;
+            margin: 10px auto;
+            display: block;
+            border: 1px solid #00ff00;
+        }
+        .glitch {
+            animation: glitch 1s linear infinite;
+            font-size: 2rem;
+            text-shadow: 0 0 0.625rem #00ff00, 0 0 1.25rem #00ff00;
+        }
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+        h1, h2, h3, h4 {
+            margin-top: 20px;
+        }
+        h2 {
+            font-size: 1.5rem;
+        }
+        h3 {
+            font-size: 1.2rem;
+        }
+        h4 {
+            font-size: 1.1rem;
+        }
+        p {
+            margin: 15px 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        ul {
+            margin: 15px 0;
+        }
+        li {
+            margin: 5px 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .back-link {
+            font-size: 0.9em;
+        }
+        #visit-counter {
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            margin-top: 15px;
+            text-shadow: 0 0 0.625rem #00ff00;
+            font-size: 1rem;
+        }
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 0.9rem;
+                padding: 3%;
+            }
+            .glitch {
+                font-size: 1.5rem;
+            }
+            .box {
+                padding: 0.75rem;
+                margin-top: 0.5rem;
+            }
+            .contact {
+                padding: 0.5rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            h3 {
+                font-size: 1rem;
+            }
+            h4 {
+                font-size: 0.9rem;
+            }
+            .back-link {
+                font-size: 0.8rem;
+            }
+            #visit-counter {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <script src="https://counterapi.com/c.js?ns=voodooos" async></script>
+</head>
+
+<body>
+    <div class="header">
+        <div id="intro">
+            <h1 class="glitch">Crocodile</h1>
+        </div>
+        <div class="back-link">
+            <a href="../../index.html">Volver al Portafolio</a>
+        </div>
+    </div>
+
+    <div class="contact">
+        <p>
+            Contacto: 
+            <a rel="me" href="https://www.instagram.com/javier.ignacio_s_f/">Instagram</a><br/>
+            <span class="email" onmouseover="e=document.getElementById('flip3');if(e.dir!='ltr'){e.dir='ltr';e.innerHTML=e.innerHTML.split('').reverse().join('');}">
+                <bdo id="flip3" dir="rtl">ablaetneufs.reivaj</bdo>@hotmail.com
+            </span>
+        </p>
+    </div>
+
+    <div class="box">
+        <h2>Tier 1 Very Easy: Crocodile - HTB Machine</h2>
+        <p>
+            En la máquina Crocodile de Hack The Box, nivel Tier 1 Very Easy, se proporcionó la IP <a href="http://10.129.1.15">http://10.129.1.15</a> para enumerar servicios con Nmap, explorar un servidor FTP, realizar enumeración web con Gobuster, y utilizar Caido para un ataque de fuerza bruta que permitió acceder al panel de login y obtener la root flag.
+        </p>
+
+        <h3>Metodología y Solución</h3>
+        <p>
+            Inicié con un escaneo de puertos en la IP 10.129.1.15 utilizando Nmap para identificar servicios activos. El comando ejecutado fue:
+            <pre>sudo nmap -sV -Pn -sC 10.129.1.15</pre>
+        </p>
+        <img src="images/output_nmap.png" class="evidence-img" alt="Output de Nmap -sC -sV -Pn">
+
+        <h4>Flag 1: ¿Qué switch de Nmap usa scripts predeterminados durante un escaneo?</h4>
+        <p>
+            Consulté el manual de Nmap y encontré que el switch <strong>-sC</strong> ejecuta scripts básicos de reconocimiento, como se usó en el comando anterior. Respuesta: <strong>-sC</strong>.
+        </p>
+        <img src="images/flag1.png" class="evidence-img" alt="Información de Flag 1">
+
+        <h4>Flag 2: ¿Qué versión de servicio corre en el puerto 21?</h4>
+        <p>
+            El output de Nmap mostró el puerto 21 abierto con el servicio FTP ejecutando <strong>vsftpd 3.0.3</strong>. Respuesta: <strong>vsftpd 3.0.3</strong>.
+        </p>
+        <img src="images/version_ftp.png" class="evidence-img" alt="Output de Nmap -sC -sV -Pn">
+        <img src="images/flag2.png" class="evidence-img" alt="Información de Flag 2">
+
+        <h4>Flag 3: ¿Qué código FTP se devuelve para el mensaje "Anonymous FTP login allowed"?</h4>
+        <p>
+            El output de Nmap mostró que el login anónimo en FTP fue exitoso con el código <strong>230</strong>. Respuesta: <strong>230</strong>.
+        </p>
+        <img src="images/code_ftp.png" class="evidence-img" alt="Output de Nmap -sC -sV -Pn">
+        <img src="images/flag3.png" class="evidence-img" alt="Información de Flag 3">
+
+        <h4>Flag 4: ¿Qué usuario proporcionamos para login anónimo en FTP?</h4>
+        <p>
+            El output de Nmap confirmó que el usuario para login anónimo es <strong>anonymous</strong> sin contraseña. Respuesta: <strong>anonymous</strong>.
+        </p>
+        <img src="images/usuario_ftp.png" class="evidence-img" alt="Output de Nmap -sC -sV -Pn">
+        <img src="images/flag4.png" class="evidence-img" alt="Información de Flag 4">
+
+        <h4>Flag 5: ¿Qué comando usamos para descargar archivos del servidor FTP?</h4>
+        <p>
+            Conecté al servidor FTP con <code>ftp 10.129.1.15</code> e inicié sesión como anonymous. Usé el comando <code>ls</code> para listar los archivos disponibles, que mostró <code>allowed.userlist</code> y <code>allowed.userlist.passwd</code>. Luego, usé el comando <strong>get</strong> para descargar ambos archivos. Respuesta: <strong>get</strong>.
+        </p>
+        <img src="images/ftp_archives.png" class="evidence-img" alt="Comando ls en FTP mostrando archivos">
+        <img src="images/ftp_archive_download.png" class="evidence-img" alt="Comando get en FTP descargando archivos">
+        <img src="images/flag5.png" class="evidence-img" alt="Información de Flag 5">
+
+        <h4>Flag 6: ¿Qué usuario de privilegio alto está en 'allowed.userlist' descargado del FTP?</h4>
+        <p>
+            El archivo <code>allowed.userlist</code> contenía varios usuarios, incluyendo <strong>admin</strong>, que indica privilegios altos. Respuesta: <strong>admin</strong>.
+        </p>
+        <img src="images/user_list.png" class="evidence-img" alt="Contenido de allowed.userlist">
+        <img src="images/flag6.png" class="evidence-img" alt="Información de Flag 6">
+
+        <h4>Flag 7: ¿Qué versión de Apache HTTP Server corre en el host objetivo?</h4>
+        <p>
+            El output de Nmap mostró el puerto 80 abierto con <strong>Apache httpd 2.4.41</strong>. Respuesta: <strong>2.4.41</strong>.
+        </p>
+        <img src="images/apache.png" class="evidence-img" alt="Output de Nmap -sC -sV -Pn">
+        <img src="images/flag7.png" class="evidence-img" alt="Información de Flag 7">
+
+        <h4>Flag 8: ¿Qué switch de Gobuster especifica que buscamos tipos de archivo específicos?</h4>
+        <p>
+        Consulté <code>gobuster --help</code> y encontré que el switch <strong>-x</strong> permite especificar extensiones de archivo. Ejecuté:
+        <pre>gobuster dir -u http://10.129.1.15 -w /usr/share/wordlists/dirb/common.txt -x php,html,txt</pre>
+        Respuesta: <strong>-x</strong>.
+        </p>
+        <img src="images/gobuster.png" class="evidence-img" alt="Información de Flag 8">
+        <img src="images/flag8.png" class="evidence-img" alt="Información de Flag 8">
+
+        <h4>Flag 9: ¿Qué archivo PHP podemos identificar con directory brute force que dará la oportunidad de autenticarnos al servicio web?</h4>
+        <p>
+        Al ejecutar el comando anterior con <code>-x php,html,txt</code> Gobuster reveló <code>/login.php</code> (Status: 200) y <code>/logout.php</code> (Status: 302). 
+        Respuesta: <strong>/login.php</strong>.
+        </p>
+        <img src="images/login_status.png" class="evidence-img" alt="Output de Gobuster mostrando /login.php">
+        <img src="images/flag9.png" class="evidence-img" alt="Información de Flag 9">
+
+        <h4>Flag 10: Submit root flag</h4>
+        <p>
+            Usé Caido para interceptar el formulario de login en <code>http://10.129.1.15/login.php</code>. A continuación, detallo el proceso con las imágenes correspondientes:
+        </p>
+        <p>
+            1. Intercepté la petición del formulario de login en Caido, mostrando los parámetros enviados en texto plano.<br>
+            2. Navegué a la pestaña Sitemap en Caido para explorar las rutas del sitio.<br>
+            3. Dentro del Sitemap, identifiqué las rutas disponibles.<br>
+            4. Encontré el dominio con el archivo <code>login.php</code> y remarqué que los parámetros de la petición (usuario y contraseña) se enviaban en texto plano, como se muestra sin número en la imagen.
+        </p>
+        <img src="images/intercept.png" class="evidence-img" alt="Interceptando petición en Caido (puntos 1-4)">
+        <p>
+            Envié la petición interceptada a la pestaña Automate en Caido para configurar un ataque de fuerza bruta con iteracion "Matrix":<br>
+            1. Accedí a la pestaña Automate.<br>
+            2. Seleccioné el modo de ataque Matrix.<br>
+            3. Remarqué el placeholder del campo de usuario.<br>
+            4. Seleccioné el tipo "Simple List" para el campo de usuario.<br>
+            5. Cargué el listado de usuarios desde <code>allowed.userlist</code>, como se muestra sin número en la imagen.
+        </p>
+        <img src="images/replace1.png" class="evidence-img" alt="Configuración de Automate en Caido (puntos 1-5)">
+        <p>
+            Continué configurando el ataque Matrix para el campo de contraseña:<br>
+            6. Remarqué el placeholder del campo de contraseña.<br>
+            7. Seleccioné el tipo "Simple List" para el campo de contraseña.<br>
+            8. Cargué el listado de contraseñas desde <code>allowed.userlist.passwd</code>, como se muestra sin número en la imagen.
+        </p>
+        <img src="images/replace2.png" class="evidence-img" alt="Configuración de payloads en Caido (puntos 6-8)">
+        <p>
+            Configuré la concurrencia del ataque Matrix:<br>
+            9. Establecí el número de tareas simultáneas en 1 y configuré un delay de 450ms para evitar saturar el servidor.<br>
+            10. Le di a run (No fue tan complicado).
+        </p>
+        <img src="images/hilos.png" class="evidence-img" alt="Configuración de concurrencia en Caido (puntos 9-10)">
+        <p>
+            El ataque Matrix en Caido identificó las credenciales válidas: <strong>admin</strong> con contraseña <strong>rKXM59ESxesUFHAd</strong>. La petición exitosa se destacó por su longitud (length) diferente en los resultados de Automate.
+        </p>
+        <img src="images/result_replace.png" class="evidence-img" alt="Resultado de Automate en Caido mostrando petición exitosa">
+        <p>
+            Con las credenciales <strong>admin</strong> y <strong>rKXM59ESxesUFHAd</strong>, inicié sesión en el panel de <code>http://10.129.1.15/login.php</code>.
+        </p>
+        <img src="images/login.png" class="evidence-img" alt="Login exitoso en el panel">
+        <p>
+            Una vez en el panel, la root flag estaba visible sin necesidad de escalar privilegios.
+        </p>
+        <img src="images/flag_root.png" class="evidence-img" alt="Página mostrando la root flag">
+        <img src="images/flag10.png" class="evidence-img" alt="Información de Flag 10">
+
+        <h3>Recursos Utilizados</h3>
+        <ul>
+            <li><a href="https://nmap.org/">Nmap - Escaneo de puertos</a></li>
+            <li><a href="https://github.com/OJ/gobuster">Gobuster - Enumeración web</a></li>
+            <li><a href="https://caido.io/">Caido - Ataque de fuerza bruta</a></li>
+            <li><a href="https://linux.die.net/man/1/ftp">FTP Client - Conexión y descarga</a></li>
+        </ul>
+
+        <h3>Notas</h3>
+        <ul>
+            <li>El servidor FTP permitió acceso anónimo y la descarga de listas de usuarios y contraseñas.</li>
+            <li>El ataque Matrix en Caido combinó usuarios y contraseñas para identificar credenciales válidas.</li>
+            <li>2025-10-12 - Análisis completado.</li>
+            <li>2025-10-12 - Publicación inicial del writeup.</li>
+        </ul>
+    </div>
+
+    <div id="visit-counter"></div>
+    <script type="module" src="/scripts/visitor_counter.js"></script>
+</body>
+</html>
