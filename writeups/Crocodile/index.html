@@ -234,7 +234,9 @@
         <h4>Flag 8: ¿Qué switch de Gobuster especifica que buscamos tipos de archivo específicos?</h4>
         <p>
         Consulté <code>gobuster --help</code> y encontré que el switch <strong>-x</strong> permite especificar extensiones de archivo. Ejecuté:
-        <pre>gobuster dir -u http://10.129.1.15 -w /usr/share/wordlists/dirb/common.txt -x php,html,txt</pre>
+        <pre>gobuster dir -u http://10.129.1.15 \
+        -w /usr/share/wordlists/dirb/common.txt \
+        -x php,html,txt</pre>
         Respuesta: <strong>-x</strong>.
         </p>
         <img src="images/gobuster.png" class="evidence-img" alt="Información de Flag 8">
