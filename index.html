@@ -1,226 +1,218 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio de Voodoo</title>
-    <style>
-        body {
-            background-color: #0a0a0a;
-            padding: 5%;
-            color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: 150;
-            margin: 0;
-            font-size: 16px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio de Voodoo</title>
+<style>
+body {
+background-color: #0a0a0a;
+padding: 5%;
+color: #00ff00;
+font-family: 'Courier New', Courier, monospace;
+font-weight: 150;
+margin: 0;
+font-size: 16px;
         }
-        a:link {
-            color: #00ff00;
-            text-decoration: none;
-            word-break: break-all;
+a:link {
+color: #00ff00;
+text-decoration: none;
+word-break: break-all;
         }
-        a:active {
-            color: #00ff99;
+a:active {
+color: #00ff99;
         }
-        a:visited {
-            color: #00cc00;
+a:visited {
+color: #00cc00;
         }
-        a:hover {
-            color: #00ff66;
-            text-decoration: underline;
+a:hover {
+color: #00ff66;
+text-decoration: underline;
         }
-        .email {
-            color: #00ff00;
+.email {
+color: #00ff00;
         }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
+.header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 2rem;
         }
-        .glitch {
-            animation: glitch 1s linear infinite;
-            font-size: 2.5rem;
-            text-shadow: 0 0 0.625rem #00ff00, 0 0 1.25rem #00ff00;
+.glitch {
+animation: glitch 1s linear infinite;
+font-size: 2.5rem;
+text-shadow: 0 0 0.625rem #00ff00, 0 0 1.25rem #00ff00;
         }
-        @keyframes glitch {
+@keyframes glitch {
             2%, 64% { transform: translate(0.125rem, 0) skew(0deg); }
             4%, 60% { transform: translate(-0.125rem, 0) skew(0deg); }
             62% { transform: translate(0, 0) skew(5deg); }
         }
-        .section {
-            border: 2px solid #00ff00;
-            border-radius: 0.625rem;
-            background-color: #001100;
-            padding: 1.25rem;
-            margin-bottom: 1.25rem;
-            box-shadow: 0 0 0.625rem #00ff00;
-            overflow-wrap: break-word;
-            word-break: break-word;
+.section {
+border: 2px solid #00ff00;
+border-radius: 0.625rem;
+background-color: #001100;
+padding: 1.25rem;
+margin-bottom: 1.25rem;
+box-shadow: 0 0 0.625rem #00ff00;
+overflow-wrap: break-word;
+word-break: break-word;
         }
-        .section h2 {
-            margin-top: 0;
-            font-size: 1.5rem;
-            border-bottom: 1px solid #00ff00;
-            padding-bottom: 0.625rem;
+.section h2 {
+margin-top: 0;
+font-size: 1.5rem;
+border-bottom: 1px solid #00ff00;
+padding-bottom: 0.625rem;
         }
-        .section h3 {
-            margin-top: 1.25rem;
-            font-size: 1.2rem;
+.section h3 {
+margin-top: 1.25rem;
+font-size: 1.2rem;
         }
-        .section p, .section ul {
-            margin: 0.625rem 0;
+.section p, .section ul {
+margin: 0.625rem 0;
         }
-        .section li {
-            margin: 0.3125rem 0;
+.section li {
+margin: 0.3125rem 0;
         }
-        .contact {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.25rem;
-            padding: 0.625rem;
-            border-bottom: 1px solid #00ff00;
+.contact {
+display: flex;
+align-items: center;
+margin-bottom: 1.25rem;
+padding: 0.625rem;
+border-bottom: 1px solid #00ff00;
         }
-        .contact p {
-            margin: 0;
-            line-height: 1.5;
-            overflow-wrap: break-word;
-            word-break: break-word;
+.contact p {
+margin: 0;
+line-height: 1.5;
+overflow-wrap: break-word;
+word-break: break-word;
         }
-        #bio {
-            text-align: justify;
+#bio {
+text-align: justify;
         }
-        #visit-counter {
-            color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-            text-align: center;
-            margin-top: 15px;
-            text-shadow: 0 0 0.625rem #00ff00;
-            font-size: 1rem;
+#visit-counter {
+color: #00ff00;
+font-family: 'Courier New', Courier, monospace;
+text-align: center;
+margin-top: 15px;
+text-shadow: 0 0 0.625rem #00ff00;
+font-size: 1rem;
         }
-        @media screen and (max-width: 600px) {
-            body {
-                font-size: 1rem;
-                padding: 3%;
+@media screen and (max-width: 600px) {
+body {
+font-size: 1rem;
+padding: 3%;
             }
-            .glitch {
-                font-size: 1.8rem;
+.glitch {
+font-size: 1.8rem;
             }
-            .section h2 {
-                font-size: 1.2rem;
+.section h2 {
+font-size: 1.2rem;
             }
-            .section h3 {
-                font-size: 1rem;
+.section h3 {
+font-size: 1rem;
             }
-            .section {
-                padding: 0.75rem;
-                margin-bottom: 0.75rem;
+.section {
+padding: 0.75rem;
+margin-bottom: 0.75rem;
             }
-            .contact {
-                padding: 0.5rem;
+.contact {
+padding: 0.5rem;
             }
-            #visit-counter {
-                font-size: 0.9rem;
+#visit-counter {
+font-size: 0.9rem;
             }
         }
-        .evidence-img {
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-            margin: 0.625rem auto;
-            display: block;
-            border: 1px solid #00ff00;
+.evidence-img {
+width: 100%;
+max-width: 800px;
+height: auto;
+margin: 0.625rem auto;
+display: block;
+border: 1px solid #00ff00;
         }
-    </style>
-    <script src="https://counterapi.com/c.js?ns=voodooos" async></script>
+</style>
+<script src="https://counterapi.com/c.js?ns=voodooos" async></script>
 </head>
-
 <body>
-    <div class="header">
-        <div id="intro">
-            <h1 class="glitch">Voodoo</h1>
-        </div>
-    </div>
-
-    <div class="contact">
-        <p>
-            Contacto: 
-            <a rel="me" href="https://www.instagram.com/javier.ignacio_s_f/">Instagram</a><br/>
-            <span class="email" onmouseover="e=document.getElementById('flip3');if(e.dir!='ltr'){e.dir='ltr';e.innerHTML=e.innerHTML.split('').reverse().join('');}">
-                <bdo id="flip3" dir="rtl">ablaetneufs.reivaj</bdo>@hotmail.com
-            </span>
-        </p>
-    </div>
-
-    <div class="section">
-        <h2>Bio</h2>
-        <p id="bio">
+<div class="header">
+<div id="intro">
+<h1 class="glitch">Voodoo</h1>
+</div>
+</div>
+<div class="contact">
+<p>
+            Contacto:
+<a rel="me" href="https://www.instagram.com/javier.ignacio_s_f/">Instagram</a><br/>
+<span class="email" onmouseover="e=document.getElementById('flip3');if(e.dir!='ltr'){e.dir='ltr';e.innerHTML=e.innerHTML.split('').reverse().join('');}">
+<bdo id="flip3" dir="rtl">ablaetneufs.reivaj</bdo>@hotmail.com
+</span>
+</p>
+</div>
+<div class="section">
+<h2>Bio</h2>
+<p id="bio">
             Soy Javier, alias Voodoo, un apasionado de las computadoras y el universo digital. Mi fascinación por la informática comenzó explorando sistemas, desde el hardware hasta el código, y encontró su hogar en Linux, donde la libertad y la personalización son la clave. Actualmente, estoy inmerso en el mundo del OSINT, desentrañando información pública con un enfoque metódico y creativo. Este portafolio es mi carta de presentación: un espacio dinámico que crecerá con writeups, proyectos y herramientas a medida que avanzo en ciberseguridad, programación y análisis de datos. Mi meta es dominar el arte de navegar el ciberespacio, siempre un paso adelante en la red.
-        </p>
-    </div>
-
-    <div class="section">
-        <h2>Última Publicación</h2>
-        <p>
-            <a href="writeups/Crocodile/index.html">Crocodile: CTF Writeup (2025-10-12)</a>
-        </p>
-    </div>
-
-    <div class="section">
-        <h2>Writeups</h2>
-        <ul>
-            <li><a href="writeups/Crocodile/index.html">Crocodile: CTF Writeup (2025-10-12)</a></li>
-            <li><a href="writeups/OhSINT/index.html">OhSINT: OSINT Writeup (2025-10-06)</a></li>
-            <li><a href="writeups/The_Suspicious_Domain/index.html">The Suspicious Domain: OSINT Writeup (2025-10-04)</a></li>
-            <li><a href="writeups/The_Puppet_Master/index.html">The Puppet Master: OSINT Writeup (2025-10-01)</a></li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>Portafolio de Proyectos</h2>
-        <h3>Exploits Avanzados</h3>
-        <ul>
-            <li><a href="#">Exploit Futuro</a></li>
-        </ul>
-        <h3>Investigaciones de Seguridad</h3>
-        <ul>
-            <li><a href="#">Investigación Futura</a></li>
-        </ul>
-        <h3>Herramientas Personalizadas</h3>
-        <ul>
-            <li><a href="#">Herramienta Futura</a></li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>Recursos</h2>
-        <ul>
-            <li><a href="#">Recurso 1</a></li>
-            <li><a href="#">Recurso 2</a></li>
-            <li><a href="#">Recurso 3</a></li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>Inspiración</h2>
-        <ul>
-            <li><a href="#">Fuente 1</a></li>
-            <li><a href="#">Fuente 2</a></li>
-            <li><a href="#">Fuente 3</a></li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>Misc</h2>
-        <ul>
-            <li>2025-10-12 - <a href="writeups/Crocodile/index.html">Crocodile</a></li>
-            <li>2025-10-06 - <a href="writeups/OhSINT/index.html">OhSINT</a></li>
-            <li>2025-10-04 - <a href="writeups/The_Suspicious_Domain/index.html">The Suspicious Domain</a></li>
-            <li>2025-10-01 - <a href="writeups/The_Puppet_Master/index.html">The Puppet Master</a></li>
-        </ul>
-    </div>
-
-    <div id="visit-counter"></div>
-    <script type="module" src="/scripts/visitor_counter.js"></script>
+</p>
+</div>
+<div class="section">
+<h2>Última Publicación</h2>
+<p>
+<a href="writeups/overthewire/bandit/index.html">Bandit: CTF Writeup (2025-11-14)</a>
+</p>
+</div>
+<div class="section">
+<h2>Writeups</h2>
+<ul>
+<li><a href="writeups/overthewire/bandit/index.html">Bandit: CTF Writeup (2025-11-14)</a></li>
+<li><a href="writeups/Crocodile/index.html">Crocodile: CTF Writeup (2025-10-12)</a></li>
+<li><a href="writeups/OhSINT/index.html">OhSINT: OSINT Writeup (2025-10-06)</a></li>
+<li><a href="writeups/The_Suspicious_Domain/index.html">The Suspicious Domain: OSINT Writeup (2025-10-04)</a></li>
+<li><a href="writeups/The_Puppet_Master/index.html">The Puppet Master: OSINT Writeup (2025-10-01)</a></li>
+</ul>
+</div>
+<div class="section">
+<h2>Portafolio de Proyectos</h2>
+<h3>Exploits Avanzados</h3>
+<ul>
+<li><a href="#">Exploit Futuro</a></li>
+</ul>
+<h3>Investigaciones de Seguridad</h3>
+<ul>
+<li><a href="#">Investigación Futura</a></li>
+</ul>
+<h3>Herramientas Personalizadas</h3>
+<ul>
+<li><a href="#">Herramienta Futura</a></li>
+</ul>
+</div>
+<div class="section">
+<h2>Recursos</h2>
+<ul>
+<li><a href="#">Recurso 1</a></li>
+<li><a href="#">Recurso 2</a></li>
+<li><a href="#">Recurso 3</a></li>
+</ul>
+</div>
+<div class="section">
+<h2>Inspiración</h2>
+<ul>
+<li><a href="#">Fuente 1</a></li>
+<li><a href="#">Fuente 2</a></li>
+<li><a href="#">Fuente 3</a></li>
+</ul>
+</div>
+<div class="section">
+<h2>Misc</h2>
+<ul>
+<li>2025-11-14 - <a href="writeups/overthewire/bandit/index.html">Bandit</a></li>
+<li>2025-10-12 - <a href="writeups/Crocodile/index.html">Crocodile</a></li>
+<li>2025-10-06 - <a href="writeups/OhSINT/index.html">OhSINT</a></li>
+<li>2025-10-04 - <a href="writeups/The_Suspicious_Domain/index.html">The Suspicious Domain</a></li>
+<li>2025-10-01 - <a href="writeups/The_Puppet_Master/index.html">The Puppet Master</a></li>
+</ul>
+</div>
+<div id="visit-counter"></div>
+<script type="module" src="/scripts/visitor_counter.js"></script>
 </body>
 </html>
