@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandit</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            padding-left: 5%;
+            padding-right: 5%;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 150;
+            font-size: 1rem;
+            margin: 0;
+        }
+        a:link { color: #00ff00; text-decoration: none; word-break: break-all; }
+        a:active { color: #00ff99; }
+        a:visited { color: #00cc00; }
+        a:hover { color: #00ff66; text-decoration: underline; }
+        .box {
+            border: 2px solid #00ff00;
+            margin-top: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #001100;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .contact {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #00ff00;
+        }
+        .contact p { margin: 0; line-height: 1.5; }
+        .glitch {
+            animation: glitch 1s linear infinite;
+            font-size: 2rem;
+            text-shadow: 0 0 0.625rem #00ff00, 0 0 1.25rem #00ff00;
+        }
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+        h1, h2, h3, h4 { margin-top: 20px; }
+        h2 { font-size: 1.5rem; }
+        h3 { font-size: 1.2rem; }
+        h4 { font-size: 1.1rem; }
+        pre {
+            background: #000;
+            padding: 10px;
+            border: 1px solid #00ff00;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .back-link { font-size: 0.9em; }
+        #visit-counter { color: #00ff00; text-align: center; margin-top: 15px; text-shadow: 0 0 0.625rem #00ff00; font-size: 1rem; }
+        @media screen and (max-width: 600px) {
+            body { font-size: 0.9rem; padding: 3%; }
+            .glitch { font-size: 1.5rem; }
+            .box { padding: 0.75rem; margin-top: 0.5rem; }
+            h2 { font-size: 1.2rem; }
+            h3 { font-size: 1rem; }
+        }
+    </style>
+    <script src="https://counterapi.com/c.js?ns=voodooos" async></script>
+</head>
+
+<body>
+    <div class="header">
+        <div id="intro">
+            <h1 class="glitch">Bandit</h1>
+        </div>
+        <div class="back-link">
+            <a href="../../index.html">Volver al Portafolio</a>
+        </div>
+    </div>
+
+    <div class="contact">
+        <p>
+            Contacto: 
+            <a rel="me" href="https://www.instagram.com/javier.ignacio_s_f/">Instagram</a><br/>
+            <span class="email" onmouseover="e=document.getElementById('flip3');if(e.dir!='ltr'){e.dir='ltr';e.innerHTML=e.innerHTML.split('').reverse().join('');}">
+                <bdo id="flip3" dir="rtl">ablaetneufs.reivaj</bdo>@hotmail.com
+            </span>
+        </p>
+    </div>
+
+    <div class="box">
+        <h2>CTF Writeup: Bandit - Niveles 0 a 4 (OverTheWire)</h2>
+        <p>
+            Bandit es un wargame de <a href="https://overthewire.org">OverTheWire</a> enfocado en fundamentos de Linux, manejo de archivos, nombres especiales y permisos. Cada nivel requiere encontrar la contraseña del siguiente usuario mediante comandos básicos.
+        </p>
+
+        <h3>Metodología y Solución</h3>
+
+        <h4>Nivel 0 → 1</h4>
+        <p>
+            Conexión inicial:
+        </p>
+        <pre>voodoo@voodoo-pc $ ssh bandit0@bandit.labs.overthewire.org -p 2220
+                         _                     _ _ _   
+                        | |__   __ _ _ __   __| (_) |_ 
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_ 
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+                                                       
+                                                      
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+backend: gibson-0
+bandit0@bandit.labs.overthewire.org's password: bandit0</pre>
+        <p>
+            Listamos archivos y leemos <code>readme</code>:
+        </p>
+        <pre>bandit0@bandit:~$ ls
+readme
+bandit0@bandit:~$ cat readme
+Congratulations on your first steps into the bandit game!!
+Please make sure you have read the rules at https://overthewire.org/rules/
+If you are following a course, workshop, walkthrough or other educational activity,
+please inform the instructor about the rules as well and encourage them to
+contribute to the OverTheWire community so we can keep these games free!
+The password you are looking for is: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If</pre>
+        <p>
+            <strong>Contraseña nivel 1:</strong> <code>ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If</code>
+        </p>
+
+        <h4>Nivel 1 → 2</h4>
+        <p>
+            Conexión con la contraseña anterior:
+        </p>
+        <pre>voodoo@voodoo-pc $ ssh bandit1@bandit.labs.overthewire.org -p 2220
+bandit1@bandit.labs.overthewire.org's password: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If</pre>
+        <p>
+            Archivo con nombre <code>-</code> (guión). No podemos usar <code>cat -</code> (se interpreta como flag). Usamos <code>./-</code>:
+        </p>
+        <pre>bandit1@bandit:~$ ls
+-
+bandit1@bandit:~$ cat ./-
+263JGJPfgU6LtdEvgfWU1XP5yac29mFx</pre>
+        <p>
+            <strong>Contraseña nivel 2:</strong> <code>263JGJPfgU6LtdEvgfWU1XP5yac29mFx</code>
+        </p>
+
+        <h4>Nivel 2 → 3</h4>
+        <p>
+            Archivo con espacios y guiones:
+        </p>
+        <pre>voodoo@voodoo-pc $ ssh bandit2@bandit.labs.overthewire.org -p 2220
+bandit2@bandit:~$ ls
+--spaces in this filename--
+bandit2@bandit:~$ cat ./--spaces\ in\ this\ filename--
+MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx</pre>
+        <p>
+            Usamos <code>\</code> para escapar espacios o autocompletado con <kbd>Tab</kbd>.
+        </p>
+        <p>
+            <strong>Contraseña nivel 3:</strong> <code>MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx</code>
+        </p>
+
+        <h4>Nivel 3 → 4</h4>
+        <p>
+            Carpeta <code>inhere</code> con archivo oculto:
+        </p>
+        <pre>voodoo@voodoo-pc $ ssh bandit3@bandit.labs.overthewire.org -p 2220
+bandit3@bandit:~$ ls
+inhere
+bandit3@bandit:~$ cd inhere/
+bandit3@bandit:~/inhere$ ls
+bandit3@bandit:~/inhere$ ls -a
+.  ..  ...Hiding-From-You
+bandit3@bandit:~/inhere$ cat ...Hiding-From-You
+2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ</pre>
+        <p>
+            <code>ls -a</code> muestra archivos ocultos (inician con <code>.</code>).
+        </p>
+        <p>
+            <strong>Contraseña nivel 4:</strong> <code>2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ</code>
+        </p>
+
+        <h3>Comandos Clave Aprendidos</h3>
+        <ul>
+            <li><code>ssh user@host -p 2220</code> – Conexión remota</li>
+            <li><code>ls, cat, cd</code> – Navegación y lectura</li>
+            <li><code>./archivo</code> – Leer archivo con nombre especial</li>
+            <li><code>ls -a</code> – Mostrar archivos ocultos</li>
+            <li><code>\ </code> o <kbd>Tab</kbd> – Escapar espacios</li>
+        </ul>
+
+        <h3>Recursos Utilizados</h3>
+        <ul>
+            <li><a href="https://overthewire.org/wargames/bandit/">Bandit - OverTheWire</a></li>
+            <li><a href="https://linux.die.net/man/1/ls">man ls</a></li>
+        </ul>
+
+        <h3>Notas</h3>
+        <ul>
+            <li>Las contraseñas son dinámicas y cambian con el tiempo.</li>
+            <li>Ideal para aprender manejo de archivos y nombres especiales en Linux.</li>
+            <li>2025-11-14 - Niveles 0 a 4 completados.</li>
+            <li>2025-11-14 - Writeup publicado.</li>
+        </ul>
+    </div>
+
+    <div id="visit-counter"></div>
+    <script type="module" src="/scripts/visitor_counter.js"></script>
+</body>
+</html>
