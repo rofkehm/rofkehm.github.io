@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bandit</title>
+<style>
+body {
+background-color: #0a0a0a;
+padding-left: 5%;
+padding-right: 5%;
+color: #00ff00;
+font-family: 'Courier New', Courier, monospace;
+font-weight: 150;
+font-size: 1rem;
+margin: 0;
+        }
+a:link { color: #00ff00; text-decoration: none; word-break: break-all; }
+a:active { color: #00ff99; }
+a:visited { color: #00cc00; }
+a:hover { color: #00ff66; text-decoration: underline; }
+.box {
+border: 2px solid #00ff00;
+margin-top: 10px;
+padding: 15px;
+border-radius: 10px;
+background-color: #001100;
+overflow-wrap: break-word;
+word-break: break-word;
+        }
+.contact {
+display: flex;
+align-items: center;
+margin-bottom: 20px;
+padding: 10px;
+border-bottom: 1px solid #00ff00;
+        }
+.contact p { margin: 0; line-height: 1.5; }
+.glitch {
+animation: glitch 1s linear infinite;
+font-size: 2rem;
+text-shadow: 0 0 0.625rem #00ff00, 0 0 1.25rem #00ff00;
+        }
+@keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+h1, h2, h3, h4 { margin-top: 20px; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1.1rem; }
+pre {
+background: #000;
+padding: 10px;
+border: 1px solid #00ff00;
+overflow-x: auto;
+font-family: 'Courier New', monospace;
+font-size: 0.9rem;
+        }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.back-link { font-size: 0.9em; }
+#visit-counter { color: #00ff00; text-align: center; margin-top: 15px; text-shadow: 0 0 0.625rem #00ff00; font-size: 1rem; }
+@media screen and (max-width: 600px) {
+body { font-size: 0.9rem; padding: 3%; }
+.glitch { font-size: 1.5rem; }
+.box { padding: 0.75rem; margin-top: 0.5rem; }
+h2 { font-size: 1.2rem; }
+h3 { font-size: 1rem; }
+        }
+.video-container {
+    max-width: 800px;
+    margin: 20px auto;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    background-color: #001100;
+    padding: 10px;
+    box-shadow: 0 0 0.625rem #00ff00;
+    overflow: hidden;
+}
+
+</style>
+<script src="https://counterapi.com/c.js?ns=voodooos" async></script>
+</head>
+<body>
+<div class="header">
+<div id="intro">
+<h1 class="glitch">Bandit</h1>
+</div>
+<div class="back-link">
+<a href="../../../index.html">Volver al Portafolio</a>
+</div>
+</div>
+<div class="contact">
+<p>
+            Contacto:
+<a rel="me" href="https://www.instagram.com/javier.ignacio_s_f/">Instagram</a><br/>
+<span class="email" onmouseover="e=document.getElementById('flip3');if(e.dir!='ltr'){e.dir='ltr';e.innerHTML=e.innerHTML.split('').reverse().join('');}">
+<bdo id="flip3" dir="rtl">ablaetneufs.reivaj</bdo>@hotmail.com
+</span>
+</p>
+</div>
+<div class="box">
+<h2>CTF Writeup: Bandit - Niveles 4 a 8 (OverTheWire)</h2>
+<p>
+            Continuamos la saga <strong>Bandit</strong>. Partimos desde el nivel 4 con la contraseña obtenida en el writeup anterior.
+</p>
+
+<h3>Demostración en Video</h3>
+<div class="video-container">
+    <div style="padding:56.25% 0 0 0;position:relative;">
+        <iframe src="https://player.vimeo.com/video/1137444666?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1" 
+                frameborder="0" 
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                style="position:absolute;top:0;left:0;width:100%;height:100%;border:1px solid #00ff00;border-radius:8px;"
+                title="Bandit 4-8 - Demostración en vivo">
+        </iframe>
+    </div>
+</div>
+<p style="text-align:center;font-size:0.9rem;margin-top:8px;">
+    <em>Grabación en vivo: resolviendo Bandit 4→8</em>
+</p>
+
+<h3>Metodología y Solución</h3>
+
+<h4>Nivel 4 → 5</h4>
+<p>
+            Nos logueamos con la contraseña del nivel anterior:
+</p>
+<pre>voodoo@voodoo-pc $ ssh bandit4@bandit.labs.overthewire.org -p 2220
+bandit4@bandit.labs.overthewire.org's password: 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ</pre>
+<p>
+            Listamos el contenido de la carpeta <code>inhere/</code>:
+</p>
+<pre>bandit4@bandit:~/inhere$ ls
+-file00  -file01  -file02  -file03  -file04  -file05  -file06  -file07  -file08  -file09</pre>
+<p>
+            El reto nos dice: <em>"The password for the next level is stored in the only human-readable file in the inhere directory."</em>
+</p>
+<p>
+            Sabemos que hay un archivo legible por humanos entre todos estos. Usamos <code>find</code> para buscar archivos tipo <code>file</code> y filtramos con <code>file --mime-type</code> para encontrar el que sea <code>text/*</code>.
+</p>
+<p>
+            Construimos un mini-script inline con <code>-exec</code>:
+</p>
+<pre>bandit4@bandit:~/inhere$ find . -type f -exec sh -c 'file --mime-type "$1" | grep -q text/ && cat "$1"' _ {} \;
+4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw</pre>
+<p>
+            <strong>Explicación paso a paso:</strong><br>
+            • <code>find . -type f</code> → busca todos los archivos en el directorio actual<br>
+            • <code>-exec sh -c '...' _ {} \;</code> → por cada archivo encontrado, ejecuta un script<br>
+            • <code>file --mime-type "$1"</code> → obtiene el tipo MIME del archivo<br>
+            • <code>grep -q text/</code> → verifica silenciosamente si es texto<br>
+            • <code>&& cat "$1"</code> → si es texto, lo imprime
+</p>
+<p>
+<strong>Contraseña nivel 5:</strong> <code>4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw</code>
+</p>
+
+<h4>Nivel 5 → 6</h4>
+<p>
+            Nos conectamos:
+</p>
+<pre>voodoo@voodoo-pc $ ssh bandit5@bandit.labs.overthewire.org -p 2220
+bandit5@bandit.labs.overthewire.org's password: 4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw</pre>
+<p>
+            Vemos muchas carpetas:
+</p>
+<pre>bandit5@bandit:~/inhere$ ls
+maybehere00  maybehere01  maybehere02  ...  maybehere19</pre>
+<p>
+            El reto: archivo con <strong>1033 bytes</strong>, <strong>human-readable</strong>, <strong>no ejecutable</strong>.
+</p>
+<p>
+            Usamos <code>find</code> con filtro de tamaño:
+</p>
+<pre>bandit5@bandit:~/inhere$ find . -type f -size 1033c | xargs cat
+HWasnPhtq9AVKe0dmk45nxy20cvUa6EG</pre>
+<p>
+            <code>-size 1033c</code> → busca archivos de exactamente 1033 bytes<br>
+            <code>xargs cat</code> → imprime el contenido del archivo encontrado
+</p>
+<p>
+<strong>Contraseña nivel 6:</strong> <code>HWasnPhtq9AVKe0dmk45nxy20cvUa6EG</code>
+</p>
+
+<h4>Nivel 6 → 7</h4>
+<p>
+            Conexión:
+</p>
+<pre>voodoo@voodoo-pc $ ssh bandit6@bandit.labs.overthewire.org -p 2220
+bandit6@bandit.labs.overthewire.org's password: HWasnPhtq9AVKe0dmk45nxy20cvUa6EG</pre>
+<p>
+            El archivo está en todo el servidor con:
+</p>
+<ul>
+<li>Dueño: <code>bandit7</code></li>
+<li>Grupo: <code>bandit6</code></li>
+<li>Tamaño: <code>33 bytes</code></li>
+</ul>
+<p>
+            No hay nada en el directorio actual. Buscamos desde la raíz:
+</p>
+<pre>bandit6@bandit:~$ find / -user bandit7 -group bandit6 -size 33c 2>/dev/null | xargs cat
+morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj</pre>
+<p>
+            <code>find /</code> → busca en todo el sistema<br>
+            <code>2>/dev/null</code> → ignora errores de permisos
+</p>
+<p>
+<strong>Contraseña nivel 7:</strong> <code>morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj</code>
+</p>
+
+<h4>Nivel 7 → 8</h4>
+<p>
+            Conexión:
+</p>
+<pre>voodoo@voodoo-pc $ ssh bandit7@bandit.labs.overthewire.org -p 2220
+bandit7@bandit.labs.overthewire.org's password: morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj</pre>
+<p>
+            Tenemos un archivo grande:
+</p>
+<pre>bandit7@bandit:~$ ls
+data.txt</pre>
+<p>
+            El reto: contraseña al lado de la palabra <code>millionth</code>.
+</p>
+<p>
+            Usamos <code>grep</code>:
+</p>
+<pre>bandit7@bandit:~$ cat data.txt | grep millionth
+millionth	dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc</pre>
+<p>
+            <code>grep millionth</code> → busca líneas que contengan esa palabra
+</p>
+<p>
+<strong>Contraseña nivel 8:</strong> <code>dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc</code>
+</p>
+
+<h3>Comandos Clave Aprendidos</h3>
+<ul>
+<li><code>find . -type f</code> – Buscar archivos</li>
+<li><code>file --mime-type</code> – Identificar tipo de archivo</li>
+<li><code>-size 1033c</code> – Filtrar por tamaño exacto</li>
+<li><code>-user / -group</code> – Filtrar por propietario</li>
+<li><code>grep "texto"</code> – Buscar en archivos</li>
+<li><code>2>/dev/null</code> – Ocultar errores</li>
+</ul>
+
+<h3>Recursos Utilizados</h3>
+<ul>
+<li><a href="https://overthewire.org/wargames/bandit/">Bandit - OverTheWire</a></li>
+<li><a href="https://linux.die.net/man/1/find">man find</a></li>
+<li><a href="https://linux.die.net/man/1/grep">man grep</a></li>
+</ul>
+
+<h3>Notas</h3>
+<ul>
+<li>Las contraseñas son dinámicas y cambian con el tiempo.</li>
+<li>Ideal para aprender <code>find</code>, <code>file</code> y búsquedas avanzadas.</li>
+<li>2025-11-16 - Niveles 4 a 8 completados.</li>
+<li>2025-11-16 - Writeup publicado.</li>
+</ul>
+</div>
+<div id="visit-counter"></div>
+<script type="module" src="/scripts/visitor_counter.js"></script>
+</body>
+</html>
